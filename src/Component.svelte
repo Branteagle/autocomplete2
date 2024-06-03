@@ -1,7 +1,6 @@
 <script lang='ts'>
     import AutoComplete from 'simple-svelte-autocomplete'
     import { getContext, onDestroy } from 'svelte';
-    import { createEventDispatcher } from 'svelte';
 
     export let field;
     export let label;
@@ -17,20 +16,21 @@
     export let results;
     export let labelFieldName;
     export let valueFieldName;
-    export let options;
+    export let onChange;
 
     let resultsPromise;
     let loadingResolver;
-    let selectedValue;
-
 
     const { styleable } = getContext('sdk');
     const component = getContext('component');
     const formContext = getContext('form');
     const formStepContext = getContext('form-step');
     const fieldGroupContext = getContext('field-group');
-    const dispatch = createEventDispatcher();
-    
+    const handleChange = e => {
+    if (onChange) {
+      onChange({ value: e.detail })
+    }
+    }
 
     let fieldState;
     let fieldApi;
@@ -144,26 +144,17 @@
     }
 
     function changeHandler(e) {
-        console.log('selectedItem', selectedItem)
-        console.log('changeHandler', e);
-        console.log('searcheventhandler', searchEvent);
-        if (selectedItem) {
-            fieldApi?.setValue(selectedItem[valueFieldName]);
-        }
+    console.log('selectedItem', selectedItem)
+    console.log('changeHandler', e);
+    console.log('searcheventhandler', searchEvent);
+    if (selectedItem) {
+        fieldApi?.setValue(selectedItem[valueFieldName]);
+        handleChange({ detail: selectedItem[valueFieldName] });
     }
-
-    function handleSelect() {
-    dispatch('onSelect', { value: selectedValue });
     }
 
 </script>
 
-<!-- The rest of the component (e.g., the select element) -->
-<select bind:value={selectedValue} on:change={handleSelect}>
-  {#each options as option}
-    <option value={option.value}>{option.label}</option>
-  {/each}
-</select>
 
 <div class='spectrum-Form-item' class:above={labelPos === "above"} use:styleable={$component.styles}>
     {#if !formContext}
