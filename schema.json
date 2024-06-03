@@ -2,8 +2,8 @@
   "type": "component",
   "metadata": {},
   "schema": {
-    "name": "autocomplete",
-    "friendlyName": "Autocomplete Field",
+    "name": "autocomplete2",
+    "friendlyName": "Autocomplete Field3",
     "description": "Dynamic Autocomplete (based on https://github.com/pstanoev/simple-svelte-autocomplete)",
     "icon": "Rename",
     "settings": [
