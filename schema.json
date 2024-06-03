@@ -29,8 +29,8 @@
       },
       {
         "type": "event",
-        "label": "On Change",
-        "key": "onChange",
+        "label": "On Select",
+        "key": "onSelect",
         "context": [
           {
             "label": "Field Value",

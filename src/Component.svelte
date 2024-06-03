@@ -1,6 +1,7 @@
 <script lang='ts'>
     import AutoComplete from 'simple-svelte-autocomplete'
     import { getContext, onDestroy } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
 
     export let field;
     export let label;
@@ -16,21 +17,20 @@
     export let results;
     export let labelFieldName;
     export let valueFieldName;
-    export let onChange;
+    export let options;
 
     let resultsPromise;
     let loadingResolver;
+    let selectedValue;
+
 
     const { styleable } = getContext('sdk');
     const component = getContext('component');
     const formContext = getContext('form');
     const formStepContext = getContext('form-step');
     const fieldGroupContext = getContext('field-group');
-    const handleChange = e => {
-    if (onChange) {
-      onChange({ value: e.detail })
-    }
-    }
+    const dispatch = createEventDispatcher();
+    
 
     let fieldState;
     let fieldApi;
@@ -152,8 +152,18 @@
         }
     }
 
+    function handleSelect() {
+    dispatch('onSelect', { value: selectedValue });
+    }
+
 </script>
 
+<!-- The rest of the component (e.g., the select element) -->
+<select bind:value={selectedValue} on:change={handleSelect}>
+  {#each options as option}
+    <option value={option.value}>{option.label}</option>
+  {/each}
+</select>
 
 <div class='spectrum-Form-item' class:above={labelPos === "above"} use:styleable={$component.styles}>
     {#if !formContext}
