@@ -28,6 +28,17 @@
         "key": "validation"
       },
       {
+        "type": "event",
+        "label": "On Change",
+        "key": "onChange",
+        "context": [
+          {
+            "label": "Field Value",
+            "key": "value"
+          }
+        ]
+      },
+      {
         "type": "select",
         "key": "dataSourceType",
         "label": "Data Source Type",

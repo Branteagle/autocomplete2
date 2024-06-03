@@ -16,6 +16,7 @@
     export let results;
     export let labelFieldName;
     export let valueFieldName;
+    export let onChange;
 
     let resultsPromise;
     let loadingResolver;
@@ -25,6 +26,11 @@
     const formContext = getContext('form');
     const formStepContext = getContext('form-step');
     const fieldGroupContext = getContext('field-group');
+    const handleChange = e => {
+    if (onChange) {
+      onChange({ value: e.detail })
+    }
+    }
 
     let fieldState;
     let fieldApi;
