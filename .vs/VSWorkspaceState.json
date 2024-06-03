@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\lib",
+    "\\src"
   ],
-  "SelectedNode": "\\C:\\Users\\brant\\Downloads\\budibase-plugins\\fixautocomplete",
+  "SelectedNode": "\\yarn.lock",
   "PreviewInSolutionExplorer": false
 }
